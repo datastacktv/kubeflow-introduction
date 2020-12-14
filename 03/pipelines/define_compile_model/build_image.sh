@@ -1,0 +1,1 @@
+gcloud builds submit --tag gcr.io/${PROJECT_ID}/define_compile_model

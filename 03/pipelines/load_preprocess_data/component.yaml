@@ -1,0 +1,21 @@
+name: kubeflow simple example
+description: Load and prepares data from keras dataset
+
+outputs:
+    - {name: train_images_data_path,        type: String,   description: Train images }
+    - {name: train_labels_data_path,          type: String,   description: Train labels}
+    - {name: test_images_data_path,            type: String,   description: Test images}
+    - {name: test_labels_data_path,          type: String,   description: Test labels}
+
+    
+
+implementation:
+  container:
+    image: gcr.io/<PROJECT_ID>/load_preprocess_data:latest
+    command: [/usr/bin/python3, src/load_preprocess_data.py]
+    args: [
+        '--train_images_data_path',             {outputPath: train_images_data_path},
+        '--train_labels_data_path',             {outputPath: train_labels_data_path},
+        '--test_images_data_path',              {outputPath: test_images_data_path},
+        '--test_labels_data_path',              {outputPath: test_labels_data_path}
+    ]

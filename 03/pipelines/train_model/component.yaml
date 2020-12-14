@@ -1,0 +1,31 @@
+name: kubeflow simple example
+description: Train DNN model
+
+
+inputs:
+  - {name: model_path,                        type: String,     default: 'None',    description: Load keras model path}
+  - {name: train_images_data_path,            type: String,     default: 'None',    description: Load x train data path}
+  - {name: train_labels_data_path,            type: String,     default: 'None',    description: Load x val data path}
+  - {name: test_images_data_path,             type: String,     default: 'None',    description: Load y train data path}
+  - {name: test_labels_data_path,             type: String,     default: 'None',    description: Load y train data path}
+
+
+outputs:
+    - {name: trained_model_path,        type: String,   description: DNN model path }
+
+implementation:
+  container:
+    image: gcr.io/<PROJECT_ID>/train_model:latest
+    command: [/usr/bin/python3, src/train_model.py]
+    args: [
+        '--model_path',                           {inputPath: model_path},
+        '--train_images_data_path',               {inputPath: train_images_data_path},
+        '--train_labels_data_path',               {inputPath: train_labels_data_path},
+        '--test_images_data_path',                {inputPath: test_images_data_path},
+        '--test_labels_data_path',                {inputPath: test_labels_data_path},
+        '--trained_model_path',                   {outputPath: trained_model_path}
+    ]
+
+
+
+

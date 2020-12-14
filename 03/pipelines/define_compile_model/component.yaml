@@ -1,0 +1,13 @@
+name: kubeflow simple example
+description: Define and compile a keras DNN very simple model
+
+outputs:
+    - {name: model_path,        type: String,   description: DNN model path }
+
+implementation:
+  container:
+    image: gcr.io/<PROJECT-ID>/define_compile_model:latest
+    command: [/usr/bin/python3, src/define_compile_model.py]
+    args: [
+        '--model_path',             {outputPath: model_path}
+    ]
