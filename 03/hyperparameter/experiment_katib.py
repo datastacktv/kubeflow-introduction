@@ -10,9 +10,9 @@ def main(params):
     test_images = test_images / 255.0
     model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
-    tf.keras.layers.Dense(cell_numbers, activation='relu'),
-    tf.keras.layers.Dense(10),
-    tf.keras.layers.Softmax()])
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dense(10)])
+    
     model.compile(optimizer='adam',
              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
              metrics=['accuracy'])
